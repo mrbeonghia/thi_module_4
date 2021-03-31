@@ -16,11 +16,11 @@ public class City {
     private String name;
     @ManyToOne
     private Country country;
-    @Min(value = 1, message = "nhap lai ")
+    @Min(value = 1, message = "nhap lai so duong")
     private Double area;
-    @Min(value = 1, message = "nhap lai")
+    @Min(value = 1, message = "nhap lai so duong")
     private Long population;
-    @Min(value = 1L, message = "nhap lai")
+    @Min(value = 1L, message = "nhap lai so duong")
     private double GDP;
     private String description;
 
