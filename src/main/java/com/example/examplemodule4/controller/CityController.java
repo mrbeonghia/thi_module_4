@@ -40,13 +40,15 @@ public class CityController {
         } else {
             cities = cityService.findAll(pageable);
         }
-        ModelAndView modelAndView = new ModelAndView("/views/listall");
+        ModelAndView modelAndView = new ModelAndView("views/listall");
         modelAndView.addObject("cities", cities );
         return modelAndView ;
     }
     @GetMapping("/city/{id}")
     public ModelAndView showListCity(@PathVariable Long id){
-        return new ModelAndView("/views/cityinfo", "city", cityService.findById(id));
+        ModelAndView modelAndView = new ModelAndView("views/cityinfo");
+        modelAndView.addObject("city",cityService.findById(id));
+        return modelAndView;
     }
     @GetMapping("/city/add")
     public ModelAndView createForm(){
@@ -68,22 +70,24 @@ public class CityController {
 
     @GetMapping("/city/edit/{id}")
     public ModelAndView editForm(@PathVariable("id") City city) {
-        ModelAndView modelAndView = new ModelAndView("/views/edit");
+        ModelAndView modelAndView = new ModelAndView("views/edit");
         modelAndView.addObject("city", city);
         return modelAndView;
     }
 
     @PostMapping("/city/edit")
-    public ModelAndView editCustomer(@ModelAttribute("customer") City city) {
-        cityService.save(city);
-        ModelAndView modelAndView = new ModelAndView("/views/edit");
-        modelAndView.addObject("city", city);
-        modelAndView.addObject("message", "update OK");
+    public ModelAndView editCustomer(@Validated @ModelAttribute("customer") City city, BindingResult bindingResult) {
+        ModelAndView modelAndView = new ModelAndView("views/edit");
+        if (!bindingResult.hasFieldErrors()) {
+            cityService.save(city);
+            modelAndView.addObject("city", city);
+            modelAndView.addObject("message", "update OK");
+        }
         return modelAndView;
     }
     @GetMapping("/city/delete/{id}")
     public ModelAndView deleteForm(@PathVariable Long id){
-        ModelAndView modelAndView = new ModelAndView("/views/delete");
+        ModelAndView modelAndView = new ModelAndView("views/delete");
         modelAndView.addObject("id", id);
         return modelAndView;
     }
@@ -91,7 +95,7 @@ public class CityController {
     @PostMapping("/city/delete")
     public ModelAndView modelAndView(@RequestParam("id") Long id){
         cityService.deleteById(id);
-        ModelAndView modelAndView = new ModelAndView("/views/index");
+        ModelAndView modelAndView = new ModelAndView("views/index");
         modelAndView.addObject("message", "Delete Success!");
         return modelAndView;
     }

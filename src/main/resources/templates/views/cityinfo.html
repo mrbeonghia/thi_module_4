@@ -129,12 +129,12 @@
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <h2>Name: <a th:text="${city.get.getName()}"></a></h2>
-                        <h2>Country: <a th:text="${city.get.getCountry().getName()}"></a></h2>
-                        <h2>Area: <a th:text="${city.get.getArea()}"></a></h2>
-                        <h2>Population: <a th:text="${city.get.getPopulation()}"></a></h2>
-                        <h2>GDP: <a th:text="${city.get.getGDP()}"></a></h2>
-                        <h2>Description: <a th:text="${city.get.getDescription()}"></a></h2>
+                        <h2>Name: <a th:text="${city.get().getName()}"></a></h2>
+                        <h2>Country: <a th:text="${city.get().getCountry().getName()}"></a></h2>
+                        <h2>Area: <a th:text="${city.get().getArea()}"></a></h2>
+                        <h2>Population: <a th:text="${city.get().getPopulation()}"></a></h2>
+                        <h2>GDP: <a th:text="${city.get().getGDP()}"></a></h2>
+                        <h2>Description: <a th:text="${city.get().getDescription()}"></a></h2>
                     </div>
                     <a th:href="@{/city/edit/__${city.get().getId()}__}">Update</a>
                     <br>
