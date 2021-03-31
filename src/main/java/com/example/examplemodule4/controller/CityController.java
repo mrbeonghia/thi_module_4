@@ -59,11 +59,10 @@ public class CityController {
     @PostMapping("/city/add")
     public ModelAndView createCity(@Validated @ModelAttribute("city") City city, BindingResult bindingResult){
         ModelAndView modelAndView = new ModelAndView("views/add");
-
         if (!bindingResult.hasFieldErrors()) {
             cityService.save(city);
             modelAndView.addObject("city", new City());
-            modelAndView.addObject("message", "Success!");
+            modelAndView.addObject("message", "Create successfully!");
         }
         return modelAndView;
     }
@@ -81,7 +80,7 @@ public class CityController {
         if (!bindingResult.hasFieldErrors()) {
             cityService.save(city);
             modelAndView.addObject("city", city);
-            modelAndView.addObject("message", "update OK");
+            modelAndView.addObject("message", "update successfully");
         }
         return modelAndView;
     }
@@ -96,7 +95,7 @@ public class CityController {
     public ModelAndView modelAndView(@RequestParam("id") Long id){
         cityService.deleteById(id);
         ModelAndView modelAndView = new ModelAndView("views/index");
-        modelAndView.addObject("message", "Delete Success!");
+        modelAndView.addObject("message", "Delete successfully!");
         return modelAndView;
     }
 }
